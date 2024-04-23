@@ -5,10 +5,14 @@ import io.micrometer.core.instrument.Metrics;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jms.annotation.EnableJms;
 
 import java.util.Optional;
 
+@EnableJms
+@EntityScan("org.example")
 @SpringBootApplication
 public class RestServiceApplication {
     @Bean
@@ -21,6 +25,7 @@ public class RestServiceApplication {
         System.out.println(otelRegistry.toString());
         return otelRegistry.orElse(null);
     }
+
     public static void main(String[] args) {
         SpringApplication.run(RestServiceApplication.class, args);
     }
